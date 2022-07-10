@@ -1,0 +1,61 @@
+create database supermark
+
+drop table if exists productos;
+create table productos(
+codigo int not null auto_increment,nombre varchar(50),descripcion varchar(50),precio float,stock int,
+primary key (codigo));
+INSERT INTO `supermark`.`productos` (`nombre`, `descripcion`, `precio`, `stock`) VALUES ('cocacola', 'coca 1', '150', '20');
+INSERT INTO `supermark`.`productos` (`nombre`, `descripcion`, `precio`, `stock`) VALUES ('cocacola', 'coca 2', '200', '20');
+INSERT INTO `supermark`.`productos` (`nombre`, `descripcion`, `precio`, `stock`) VALUES ('fanta', 'fanta 1', '150', '20');
+INSERT INTO `supermark`.`productos` (`nombre`, `descripcion`, `precio`, `stock`) VALUES ('fanta', 'fanta 2', '200', '20');
+INSERT INTO `supermark`.`productos` (`nombre`, `descripcion`, `precio`, `stock`) VALUES ('fanta', 'fanta 3', '300', '20');
+INSERT INTO `supermark`.`productos` (`nombre`, `descripcion`, `precio`, `stock`) VALUES ('sprite', 'sprite 1', '150', '20');
+
+drop table if exists clientes;
+create table clientes(
+codigo int not null auto_increment,nombre varchar(50),apellido varchar(50),dni int unique not null,domiciolio varchar(50),
+primary key (codigo));	
+INSERT INTO `supermark`.`clientes` (`codigo`, `nombre`, `apellido`, `dni`, `domiciolio`) VALUES ('1', 'sebastian', 'pacheco', '28861496', '25 de mayo 1103');
+INSERT INTO `supermark`.`clientes` (`codigo`, `nombre`, `apellido`, `dni`, `domiciolio`) VALUES ('2', 'juan', 'perez', '12122134', 'alvarado 33');
+INSERT INTO `supermark`.`clientes` (`codigo`, `nombre`, `apellido`, `dni`, `domiciolio`) VALUES ('3', 'liliana', 'garcia', '25295456', 'salta');
+INSERT INTO `supermark`.`clientes` (`codigo`, `nombre`, `apellido`, `dni`, `domiciolio`) VALUES ('4', 'nicolas', 'guanca', '30303030', 'salta');
+INSERT INTO `supermark`.`clientes` (`codigo`, `nombre`, `apellido`, `dni`, `domiciolio`) VALUES ('5', 'pablo', 'camacho', '30323232', 'salta');
+INSERT INTO `supermark`.`clientes` (`codigo`, `nombre`, `apellido`, `dni`, `domiciolio`) VALUES ('6', 'jose', 'david', '45454545', 'salta');
+
+drop table if exists usuarios;
+create table usuarios(
+codigo int not null,nick varchar(50) unique not null,contrasena varchar(50) not null,tipo varchar(1) not null,
+primary key (codigo));
+INSERT INTO `supermark`.`usuarios` (`codigo`, `nick`, `contrasena`, `tipo`) VALUES ('1', 'seba1081', '1234', 'c');
+INSERT INTO `supermark`.`usuarios` (`codigo`, `nick`, `contrasena`, `tipo`) VALUES ('2', 'admin', 'admin', 'a');
+INSERT INTO `supermark`.`usuarios` (`codigo`, `nick`, `contrasena`, `tipo`) VALUES ('3', 'lili', 'gaga', 'c');
+INSERT INTO `supermark`.`usuarios` (`codigo`, `nick`, `contrasena`, `tipo`) VALUES ('4', 'nini', 'gugu', 'c');
+INSERT INTO `supermark`.`usuarios` (`codigo`, `nick`, `contrasena`, `tipo`) VALUES ('5', 'papa', 'caca', 'c');
+INSERT INTO `supermark`.`usuarios` (`codigo`, `nick`, `contrasena`, `tipo`) VALUES ('6', 'jojo', 'dada', 'c');
+
+
+UPDATE `supermark`.`productos` SET `nombre` = 'fanta', `descripcion` = 'fanta 1', `stock` = '10' WHERE (`codigo` = '2');
+UPDATE `supermark`.`productos` SET `nombre` = 'sprite', `descripcion` = 'sprite 1', `stock` = '10' WHERE (`codigo` = '3');
+UPDATE `supermark`.`productos` SET `nombre` = 'galleta', `descripcion` = 'arcor', `stock` = '3' WHERE (`codigo` = '4');
+UPDATE `supermark`.`productos` SET `nombre` = 'alfajor', `descripcion` = 'jorgito', `stock` = '2' WHERE (`codigo` = '5');
+UPDATE `supermark`.`productos` SET `stock` = '10' WHERE (`codigo` = '1');
+UPDATE `supermark`.`productos` SET `nombre` = 'chicle', `descripcion` = 'belden', `stock` = '5' WHERE (`codigo` = '6');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('7', 'caramelo', 'meta', '100', '10');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('8', 'ketchup', '350cc', '200', '5');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('9', 'mayonesa', '250gr', '100', '5');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('10', 'sabora', '250gr', '100', '5');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('11', 'fideo', 'anillito', '120', '5');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('12', 'arroz', 'fino larfo', '120', '5');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('13', 'harina', '0000', '180', '10');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('14', 'polenta', 'presto', '150', '10');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('15', 'leche', 'entera', '200', '10');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('16', 'leche', 'chocolatada', '300', '10');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('17', 'yogur', 'frutill', '150', '5');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('18', 'yogur', 'vainilla', '150', '5');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('19', 'aceite', 'girasol', '300', '5');
+INSERT INTO `supermark`.`productos` (`codigo`, `nombre`, `descripcion`, `precio`, `stock`) VALUES ('20', 'aceite', 'oliva', '600', '5');
+
+drop table if exists ventas;
+create table ventas(id int auto_increment not null,fecha date,cc int,cp int,cantidad int, primary key (id), foreign key(cc) references clientes(codigo),
+foreign key (cp) references productos(codigo) );
+
